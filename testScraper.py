@@ -1,11 +1,11 @@
-from scraper import Scraper
+import scraper
 from bs4 import BeautifulSoup
 
 
 # Assert that getSoup returns BeautifulSoup object
 def testGetSoup():
     url = "https://www.bu.edu/academics/eng/courses"
-    result = Scraper.getSoup(url)
+    result = scraper.getSoup(url)
     assert isinstance(result, BeautifulSoup), "Result is not a BeautifulSoup" \
         "object"
 
@@ -16,7 +16,7 @@ def testGetSoup():
 def testGetNumPages():
     url = "https://www.bu.edu/academics/eng/courses"
     minPages = 20
-    numPages = Scraper.getNumPages(url)
+    numPages = scraper.getNumPages(url)
     assert numPages >= minPages, "Does not have more than 20 pages"
 
 
@@ -25,7 +25,7 @@ def testGetNumPages():
 # class will be BE 209 for a while though.
 def testGetClassInfoFromPage():
     url = "https://www.bu.edu/academics/eng/courses"
-    classes = Scraper.getClassInfoFromPage(url)
+    classes = scraper.getClassInfoFromPage(url)
     className = "ENG BE 209: Principles of Molecular Cell Biology and " \
         "Biotechnology"
     assert classes[0] == className, "The class name does not match"

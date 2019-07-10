@@ -4,17 +4,21 @@ def parseClassNames(line):
 
 
 def readClassNames(filename):
-    f = open(filename)
+    f = open(filename, 'r')
     classCodes = []
 
     for line in f:
         classCodes.append(parseClassNames(line))
 
+    f.close()
+
     return classCodes
 
 
-def writeClassNames(filename, classNames):
-    f = open(filename, 'w')
+def writeClassNames(filename, classList):
+    f = open(filename, 'x')
 
-    for classString in classNames:
-        f.write(classString)
+    for classString in classList:
+        f.write(classString + '\n')
+
+    f.close()
