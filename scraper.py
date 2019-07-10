@@ -27,3 +27,25 @@ def getClassInfoFromPage(url):
         classes.append(name.contents)
     classes = reduce(lambda x, y: x + y, classes)
     return classes
+
+
+def getClassDetails(code):
+    urlFront = 'https://www.bu.edu/academics/'
+    urlBack = '/courses/'
+    college = code.split('-')[0]
+    url = urlFront + college + urlBack + code
+
+    soup = getSoup(url)
+    courseContentDiv = soup.find("div", {"id": "course-content"})
+    description = courseContentDiv.find('p', recursive=False).contents[0]
+    hubUl = courseContentDiv.find('ul', {"class": "cf-hub-offerings"})
+    hubList = []
+    for li in hubUl.find_all('li', recursive=False):
+        hubList.append(li.contents[0])
+    infoBoxDiv = courseContentDiv.find("div", {"id": "info-box"})
+    credits = infoBoxDiv.find_all("dd")[0].contents[0]
+    # Have to get prerequisites
+    # Have to get schedule
+    print(description)
+    print(hubList)
+    print(credits)
