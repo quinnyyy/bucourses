@@ -42,7 +42,7 @@ if __name__ == "__main__":
     urlFront = 'https://www.bu.edu/academics/'
     urlBack = '/courses/'
 
-    f = open("classNames.txt", "w")
+    f = open("classNames.txt", "x")
 
     for college in colleges:
         print("Getting page number for " + college)
