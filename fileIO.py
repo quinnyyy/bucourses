@@ -1,5 +1,7 @@
 def parseClassNames(line):
     classCode = line.split(':')[0]
+    classCode = classCode.lower()
+    classCode = classCode.replace(' ', '-')
     return classCode
 
 
