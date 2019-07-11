@@ -1,0 +1,121 @@
+{
+    "Code": "eng-ec-311",
+    "Description": "Introduction to hardware building blocks used in digital computers. Boolean  algebra, combinatorial and sequential circuits: analysis and design. Adders,  multipliers, decoders, encoders, multiplexors. Programmable logic devices:  read-only memory, programmable arrays, Verilog. Counters and registers.  Includes lab. 4 cr. ",
+    "HubList": [],
+    "Credits": "4",
+    "Prerequisites": "Sophomore standing.",
+    "Sections": [
+        {
+            "Semester": "FALL 2019",
+            "Section": "A1",
+            "Instructor": "Joshi",
+            "Location": "PHO 203",
+            "Schedule": "MW 12:20 pm-2:05 pm",
+            "Notes": "Class Closed"
+        },
+        {
+            "Semester": "FALL 2019",
+            "Section": "B1",
+            "Instructor": "Joshi",
+            "Location": "PHO 115",
+            "Schedule": "M 10:10 am-11:55 am",
+            "Notes": "Class Full"
+        },
+        {
+            "Semester": "FALL 2019",
+            "Section": "B2",
+            "Instructor": "Joshi",
+            "Location": "PHO 115",
+            "Schedule": "F 12:20 pm-2:05 pm",
+            "Notes": "Class Full"
+        },
+        {
+            "Semester": "FALL 2019",
+            "Section": "B3",
+            "Instructor": "Joshi",
+            "Location": "PHO 115",
+            "Schedule": "T 9:00 am-10:45 am",
+            "Notes": ""
+        },
+        {
+            "Semester": "FALL 2019",
+            "Section": "B4",
+            "Instructor": "Joshi",
+            "Location": "PHO 115",
+            "Schedule": "R 3:30 pm-5:15 pm",
+            "Notes": ""
+        },
+        {
+            "Semester": "FALL 2019",
+            "Section": "B5",
+            "Instructor": "Joshi",
+            "Location": "PHO 115",
+            "Schedule": "W 4:30 pm-6:15 pm",
+            "Notes": "Class Full"
+        },
+        {
+            "Semester": "SPRG 2020",
+            "Section": "A1",
+            "Instructor": "Moreshet",
+            "Location": "",
+            "Schedule": "MW 2:30 pm-4:15 pm",
+            "Notes": ""
+        },
+        {
+            "Semester": "SPRG 2020",
+            "Section": "A2",
+            "Instructor": "Giles",
+            "Location": "",
+            "Schedule": "TR 1:30 pm-3:15 pm",
+            "Notes": ""
+        },
+        {
+            "Semester": "SPRG 2020",
+            "Section": "C1",
+            "Instructor": "Moreshet",
+            "Location": "",
+            "Schedule": "T 6:30 pm-8:15 pm",
+            "Notes": ""
+        },
+        {
+            "Semester": "SPRG 2020",
+            "Section": "C2",
+            "Instructor": "Moreshet",
+            "Location": "",
+            "Schedule": "T 9:00 am-10:45 am",
+            "Notes": ""
+        },
+        {
+            "Semester": "SPRG 2020",
+            "Section": "C3",
+            "Instructor": "Moreshet",
+            "Location": "",
+            "Schedule": "R 6:30 pm-8:15 pm",
+            "Notes": ""
+        },
+        {
+            "Semester": "SPRG 2020",
+            "Section": "C4",
+            "Instructor": "Moreshet",
+            "Location": "",
+            "Schedule": "T 1:30 pm-3:15 pm",
+            "Notes": ""
+        },
+        {
+            "Semester": "SPRG 2020",
+            "Section": "C5",
+            "Instructor": "Moreshet",
+            "Location": "",
+            "Schedule": "W 6:30 pm-8:15 pm",
+            "Notes": ""
+        },
+        {
+            "Semester": "SPRG 2020",
+            "Section": "C6",
+            "Instructor": "Moreshet",
+            "Location": "",
+            "Schedule": "M 6:30 pm-8:15 pm",
+            "Notes": ""
+        }
+    ]
+}
