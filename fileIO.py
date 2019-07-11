@@ -1,5 +1,6 @@
 import json
 
+
 def parseClassNames(line):
     classCode = line.split(':')[0]
     classCode = classCode.lower()
