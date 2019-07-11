@@ -1,3 +1,5 @@
+import json
+
 def parseClassNames(line):
     classCode = line.split(':')[0]
     classCode = classCode.lower()
@@ -24,3 +26,10 @@ def writeClassNames(filename, classList):
         f.write(classString + '\n')
 
     f.close()
+
+
+def writeJSONFile(classcode, dictionary):
+    filename = classcode + '.json'
+
+    with open(filename, 'w') as outfile:
+        json.dump(dictionary, outfile, indent=4)
