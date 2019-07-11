@@ -34,18 +34,41 @@ def getClassDetails(code):
     urlBack = '/courses/'
     college = code.split('-')[0]
     url = urlFront + college + urlBack + code
-
     soup = getSoup(url)
     courseContentDiv = soup.find("div", {"id": "course-content"})
     description = courseContentDiv.find('p', recursive=False).contents[0]
+
     hubUl = courseContentDiv.find('ul', {"class": "cf-hub-offerings"})
     hubList = []
-    for li in hubUl.find_all('li', recursive=False):
-        hubList.append(li.contents[0])
+    if hubUl is not None:
+        for li in hubUl.find_all('li', recursive=False):
+            hubList.append(li.contents[0])
+
+    # Finding the credits and prerequisites in the info box.
     infoBoxDiv = courseContentDiv.find("div", {"id": "info-box"})
-    credits = infoBoxDiv.find_all("dd")[0].contents[0]
+    infoBoxItems = infoBoxDiv.find_all('dd')
+
+    credits = infoBoxItems[0].contents[0]
+    prerequisites = infoBoxItems[1].contents[0]
+
+    # Finding the information for each section.
+    courseSchedulesDiv = courseContentDiv.find('div', {'class': 'cf-course'})
+    semesterHeaders = courseSchedulesDiv.find_all('strong')
+    sectionTables = courseSchedulesDiv.find_all('table')
+
+    for index, section in enumerate(sectionTables):
+        semester = semesterHeaders[index].contents[0]
+        print(semester)
+        sectionInfo = section.find_all('td')
+        for info in sectionInfo:
+            if len(info.contents) != 0:
+                print(info.contents[0].strip())
+
+        print()
+
     # Have to get prerequisites
     # Have to get schedule
     print(description)
     print(hubList)
     print(credits)
+    print(prerequisites)
