@@ -52,23 +52,31 @@ def getClassDetails(code):
     prerequisites = infoBoxItems[1].contents[0]
 
     # Finding the information for each section.
+    columns = ['Section', 'Instructor', 'Location', 'Schedule', 'Notes']
+    sections = []
+
     courseSchedulesDiv = courseContentDiv.find('div', {'class': 'cf-course'})
     semesterHeaders = courseSchedulesDiv.find_all('strong')
     sectionTables = courseSchedulesDiv.find_all('table')
 
-    for index, section in enumerate(sectionTables):
-        semester = semesterHeaders[index].contents[0]
-        print(semester)
-        sectionInfo = section.find_all('td')
-        for info in sectionInfo:
+    for indexTable, table in enumerate(sectionTables):
+        sectionDictionary = {}
+        sectionDictionary['Semester'] = semesterHeaders[indexTable].contents[0]
+
+        sectionInfo = table.find_all('td')
+        for indexInfo, info in enumerate(sectionInfo):
+            columnHeader = columns[indexInfo]
             if len(info.contents) != 0:
-                print(info.contents[0].strip())
+                sectionDictionary[columnHeader] = info.contents[0].strip()
+            else:
+                sectionDictionary[columnHeader] = ''
 
-        print()
+        sections.append(sectionDictionary)
 
-    # Have to get prerequisites
-    # Have to get schedule
-    print(description)
-    print(hubList)
-    print(credits)
-    print(prerequisites)
+    courseDictionary = {'Description': description,
+                        'HubList': hubList,
+                        'Credits': credits,
+                        'Prerequisites': prerequisites,
+                        'Sections': sections}
+
+    return courseDictionary
