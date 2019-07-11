@@ -49,7 +49,11 @@ def getClassDetails(code):
     infoBoxItems = infoBoxDiv.find_all('dd')
 
     credits = infoBoxItems[0].contents[0]
-    prerequisites = infoBoxItems[1].contents[0]
+
+    if len(infoBoxItems) > 1:
+        prerequisites = infoBoxItems[1].contents[0]
+    else:
+        prerequisites = ''
 
     # Finding the information for each section.
     columns = ['Section', 'Instructor', 'Location', 'Schedule', 'Notes']
@@ -67,13 +71,20 @@ def getClassDetails(code):
         for indexInfo, info in enumerate(sectionInfo):
             columnHeader = columns[indexInfo]
             if len(info.contents) != 0:
-                sectionDictionary[columnHeader] = info.contents[0].strip()
+                if len(info.contents) == 1:
+                    sectionDictionary[columnHeader] = info.contents[0].strip()
+                else:
+                    combinedString = reduce(lambda x, y: x +
+                                            (y if isinstance(y, str) else ' '),
+                                            info.contents)
+                    sectionDictionary[columnHeader] = combinedString.strip()
             else:
                 sectionDictionary[columnHeader] = ''
 
         sections.append(sectionDictionary)
 
-    courseDictionary = {'Description': description,
+    courseDictionary = {'Code': code,
+                        'Description': description,
                         'HubList': hubList,
                         'Credits': credits,
                         'Prerequisites': prerequisites,

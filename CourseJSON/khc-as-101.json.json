@@ -1,0 +1,21 @@
+{
+    "Code": "khc-as-101",
+    "Description": "The change in Pluto's status as a planet generated controversies within the  non-science community that far exceeded those among astronomers. This seminar  explores the science behind the decision and the varied roles of evidence in  reaching conclusions. This course fulfills a single unit in each of the  following BU Hub areas: Scientific Inquiry II, Quantitative Reasoning II,  Critical Thinking.",
+    "HubList": [
+        "Scientific Inquiry II",
+        "Quantitative Reasoning II",
+        "Critical Thinking"
+    ],
+    "Credits": "4",
+    "Prerequisites": "",
+    "Sections": [
+        {
+            "Semester": "FALL 2019",
+            "Section": "A1",
+            "Instructor": "Mendillo",
+            "Location": "CAS 500",
+            "Schedule": "TR 9:30 am-10:45 am",
+            "Notes": "Kilachand Freshmen Only"
+        }
+    ]
+}

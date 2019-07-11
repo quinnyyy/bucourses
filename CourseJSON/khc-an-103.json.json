@@ -1,0 +1,21 @@
+{
+    "Code": "khc-an-103",
+    "Description": "This course, \"Animals among Humans,\" complements a hitherto existing course,  KHC AN 101, Human among Animals.\" Comparing and contrasting humans and (other)  animals, It explores the relations between them, with emphasis on the  experiences of the nonhuman animals themselves. [The other course, Humans among  Animals, also explores human-animal comparisons, contrasts, and interactions,  but it does so with emphasis on the experiences of the humans involved.] This  course fulfills a single unit in each of the following BU Hub areas: Historical  Consciousness, Global Citizenship and Intercultural Literacy, Critical  Thinking.",
+    "HubList": [
+        "Historical Consciousness",
+        "Global Citizenship and Intercultural Literacy",
+        "Critical Thinking"
+    ],
+    "Credits": "4",
+    "Prerequisites": "",
+    "Sections": [
+        {
+            "Semester": "FALL 2019",
+            "Section": "A1",
+            "Instructor": "Shipton",
+            "Location": "CGS 121",
+            "Schedule": "TR 3:30 pm-4:45 pm",
+            "Notes": "Kilachand Freshmen Only"
+        }
+    ]
+}
