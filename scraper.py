@@ -80,7 +80,7 @@ def findCourseSections(courseContentDiv):
 
         sectionInfo = table.find_all('td')
         for indexInfo, info in enumerate(sectionInfo):
-            if indexInfo > 4 and indexInfo % NUMCOLUMNS == 0:
+            if indexInfo > (NUMCOLUMNS - 1) and indexInfo % NUMCOLUMNS == 0:
                 sections.append(sectionDictionary.copy())
 
             columnHeader = columns[indexInfo % NUMCOLUMNS]
