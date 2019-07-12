@@ -29,22 +29,29 @@ def getClassInfoFromPage(url):
     return classes
 
 
-def getClassDetails(code):
-    urlFront = 'https://www.bu.edu/academics/'
-    urlBack = '/courses/'
-    college = code.split('-')[0]
-    url = urlFront + college + urlBack + code
-    soup = getSoup(url)
-    courseContentDiv = soup.find("div", {"id": "course-content"})
-    description = courseContentDiv.find('p', recursive=False).contents[0]
+'''
+Helper Functions to find Course Details
+'''
 
+
+def findDescription(courseContentDiv):
+    descriptionBox = courseContentDiv.find('p', recursive=False).contents
+    description = descriptionBox[0] if len(descriptionBox) != 0 else ''
+
+    return description
+
+
+def findHubList(courseContentDiv):
     hubUl = courseContentDiv.find('ul', {"class": "cf-hub-offerings"})
     hubList = []
     if hubUl is not None:
         for li in hubUl.find_all('li', recursive=False):
             hubList.append(li.contents[0])
 
-    # Finding the credits and prerequisites in the info box.
+    return hubList
+
+
+def findCreditsPrereqs(courseContentDiv):
     infoBoxDiv = courseContentDiv.find("div", {"id": "info-box"})
     infoBoxItems = infoBoxDiv.find_all('dd')
 
@@ -55,7 +62,10 @@ def getClassDetails(code):
     else:
         prerequisites = ''
 
-    # Finding the information for each section.
+    return (credits, prerequisites)
+
+
+def findCourseSections(courseContentDiv):
     columns = ['Section', 'Instructor', 'Location', 'Schedule', 'Notes']
     sections = []
 
@@ -69,7 +79,10 @@ def getClassDetails(code):
 
         sectionInfo = table.find_all('td')
         for indexInfo, info in enumerate(sectionInfo):
-            columnHeader = columns[indexInfo]
+            if indexInfo > 4 and indexInfo % 5 == 0:
+                sections.append(sectionDictionary.copy())
+
+            columnHeader = columns[indexInfo % 5]
             if len(info.contents) != 0:
                 if len(info.contents) == 1:
                     sectionDictionary[columnHeader] = info.contents[0].strip()
@@ -82,6 +95,22 @@ def getClassDetails(code):
                 sectionDictionary[columnHeader] = ''
 
         sections.append(sectionDictionary)
+
+    return sections
+
+
+def getClassDetails(code):
+    urlFront = 'https://www.bu.edu/academics/'
+    urlBack = '/courses/'
+    college = code.split('-')[0]
+    url = urlFront + college + urlBack + code
+    soup = getSoup(url)
+    courseContentDiv = soup.find("div", {"id": "course-content"})
+
+    description = findDescription(courseContentDiv)
+    hubList = findHubList(courseContentDiv)
+    credits, prerequisites = findCreditsPrereqs(courseContentDiv)
+    sections = findCourseSections(courseContentDiv)
 
     courseDictionary = {'Code': code,
                         'Description': description,
