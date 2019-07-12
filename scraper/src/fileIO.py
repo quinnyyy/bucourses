@@ -9,7 +9,7 @@ def parseClassNames(line):
 
 
 def readClassNames(filename):
-    f = open(filename, 'r')
+    f = open('../' + filename, 'r')
     classCodes = []
 
     for line in f:
@@ -21,7 +21,7 @@ def readClassNames(filename):
 
 
 def writeClassNames(filename, classList):
-    f = open(filename, 'x')
+    f = open('../' + filename, 'x')
 
     for classString in classList:
         f.write(classString + '\n')
@@ -30,7 +30,7 @@ def writeClassNames(filename, classList):
 
 
 def writeJSONFile(classcode, dictionary):
-    filename = classcode + '.json'
+    filename = '../' + classcode + '.json'
 
     with open(filename, 'w') as outfile:
         json.dump(dictionary, outfile, indent=4)

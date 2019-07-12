@@ -107,11 +107,11 @@ def getClassDetails(code):
     college = code.split('-')[0]
     if college == 'qst':
         college = 'questrom'
+    elif college == 'med':
+        college = 'busm'
     url = urlFront + college + urlBack + code
     soup = getSoup(url)
     courseContentDiv = soup.find("div", {"id": "course-content"})
-
-    print(url)
 
     description = findDescription(courseContentDiv)
     hubList = findHubList(courseContentDiv)
