@@ -66,6 +66,7 @@ def findCreditsPrereqs(courseContentDiv):
 
 
 def findCourseSections(courseContentDiv):
+    NUMCOLUMNS = 5
     columns = ['Section', 'Instructor', 'Location', 'Schedule', 'Notes']
     sections = []
 
@@ -79,10 +80,10 @@ def findCourseSections(courseContentDiv):
 
         sectionInfo = table.find_all('td')
         for indexInfo, info in enumerate(sectionInfo):
-            if indexInfo > 4 and indexInfo % 5 == 0:
+            if indexInfo > 4 and indexInfo % NUMCOLUMNS == 0:
                 sections.append(sectionDictionary.copy())
 
-            columnHeader = columns[indexInfo % 5]
+            columnHeader = columns[indexInfo % NUMCOLUMNS]
             if len(info.contents) != 0:
                 if len(info.contents) == 1:
                     sectionDictionary[columnHeader] = info.contents[0].strip()
