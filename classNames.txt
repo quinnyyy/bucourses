@@ -6228,7 +6228,6 @@ MET EN 141: Literary Types: Fiction
 MET EN 142: Literary Types: Poetry
 MET EN 143: Literary Types: Drama
 MET EN 175: Literature and the Art of Film
-
 MET EN 201: Intermediate Composition
 MET EN 202: Introduction to Creative Writing
 MET EN 220: Proseminar: Literacy Study

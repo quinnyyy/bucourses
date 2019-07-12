@@ -18,7 +18,7 @@ if __name__ == "__main__":
     classNames = fileIO.readClassNames('classnames.txt')
     classCodes = list(map(fileIO.parseClassNames, classNames))
 
-    for i, classCode in enumerate(classCodes):
+    for i, classCode in enumerate(classCodes[6504:-1]):
         print(classCode)
         print(i)
         classInfo = scraper.getClassDetails(classCode)

@@ -26,6 +26,7 @@ def getClassInfoFromPage(url):
         name = li.find('a').find('strong')
         classes.append(name.contents)
     classes = reduce(lambda x, y: x + y, classes)
+    classes = list(map(lambda x: x.rstrip('\n'), classes))
     return classes
 
 
@@ -104,9 +105,13 @@ def getClassDetails(code):
     urlFront = 'https://www.bu.edu/academics/'
     urlBack = '/courses/'
     college = code.split('-')[0]
+    if college == 'qst':
+        college = 'questrom'
     url = urlFront + college + urlBack + code
     soup = getSoup(url)
     courseContentDiv = soup.find("div", {"id": "course-content"})
+
+    print(url)
 
     description = findDescription(courseContentDiv)
     hubList = findHubList(courseContentDiv)
