@@ -5,7 +5,7 @@ CURRENTDIR = os.path.dirname(os.path.abspath(__file__))
 PARENTDIR = os.path.dirname(CURRENTDIR)
 SRCDIR = os.path.join(PARENTDIR, 'src')
 sys.path.insert(0, SRCDIR)
-import scraper
+import scraper # noqa
 
 
 # Assert that getSoup returns BeautifulSoup object
