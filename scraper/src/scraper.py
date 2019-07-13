@@ -109,6 +109,8 @@ def getClassDetails(code):
         college = 'questrom'
     elif college == 'med':
         college = 'busm'
+    elif college == 'sed':
+        college = 'wheelock'
     url = urlFront + college + urlBack + code
     soup = getSoup(url)
     courseContentDiv = soup.find("div", {"id": "course-content"})
