@@ -13,6 +13,6 @@ for classCode in classCodes:
     savePath = os.path.join(JSONDIRPATH, classCode + '.json')
     dictionary = scraper.getClassDetails(classCode)
 
-    fileIO.writeJSONFile(savePath, dictionary)
+    # fileIO.writeJSONFile(savePath, dictionary)
 
 print(classCodes)

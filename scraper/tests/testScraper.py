@@ -1,5 +1,11 @@
-import scraper
 from bs4 import BeautifulSoup
+import sys
+import os
+CURRENTDIR = os.path.dirname(os.path.abspath(__file__))
+PARENTDIR = os.path.dirname(CURRENTDIR)
+SRCDIR = os.path.join(PARENTDIR, 'src')
+sys.path.insert(0, SRCDIR)
+import scraper
 
 
 # Assert that getSoup returns BeautifulSoup object
