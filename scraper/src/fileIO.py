@@ -1,4 +1,8 @@
 import json
+import os
+
+TESTSDIR = os.path.dirname(os.path.abspath(__file__))
+PARENTDIR = os.path.dirname(TESTSDIR)
 
 
 def parseClassNames(line):
@@ -9,7 +13,8 @@ def parseClassNames(line):
 
 
 def readClassNames(filename):
-    f = open('../' + filename, 'r')
+    filePath = os.path.join(PARENTDIR, filename)
+    f = open(filePath, 'r')
     classCodes = []
 
     for line in f:
@@ -21,7 +26,8 @@ def readClassNames(filename):
 
 
 def writeClassNames(filename, classList):
-    f = open('../' + filename, 'x')
+    filePath = os.path.join(PARENTDIR, filename)
+    f = open(filePath, 'x')
 
     for classString in classList:
         f.write(classString + '\n')
@@ -30,7 +36,8 @@ def writeClassNames(filename, classList):
 
 
 def writeJSONFile(classcode, dictionary):
-    filename = '../' + classcode + '.json'
+    filename = classcode + '.json'
+    filePath = os.path.join(PARENTDIR, filename)
 
-    with open(filename, 'w') as outfile:
+    with open(filePath, 'w') as outfile:
         json.dump(dictionary, outfile, indent=4)
