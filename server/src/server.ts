@@ -1,7 +1,9 @@
 import express = require('express');
 import { MongoHelper } from './mongoHelper';
+import cors = require('cors');
 
 const app: express.Application = express();
+app.use(cors());
 var courseInfo: any;
 
 

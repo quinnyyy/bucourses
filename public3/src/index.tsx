@@ -7,6 +7,6 @@ import { Hello } from "./components/Hello";
 //npx webpack to run and then open index.html
 
 ReactDOM.render(
-    <Hello compiler="TypeScript" framework="React" />,
+    <Hello code="cas-cs-411"/>,
     document.getElementById("example")
 );
