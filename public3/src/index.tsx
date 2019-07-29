@@ -7,6 +7,8 @@ import { ClassInfo } from "./components/ClassInfo";
 import { TestHome } from "./components/TestHome";
 import { ClassSearch } from "./components/ClassSearch";
 import { NavBar } from "./components/NavBar";
+import { App } from "./components/App";
+import { ClassBundle } from "./components/ClassBundle";
 
 //npx webpack to run and then open index.html
 //npm start runs webpack and starts server
@@ -14,10 +16,8 @@ import { NavBar } from "./components/NavBar";
 const routing = (
     <Router>
       <div>
-        <Switch>
-            <Route path="/" component={NavBar} />
-            <Route path="/search" component={ClassSearch} />
-        </Switch>
+            <Route path="/" component={App} />
+            <Route path="/search" component={ClassBundle} />
       </div>
     </Router>
   )

@@ -2,9 +2,10 @@ import * as React from "react";
 
 // Maybe later the props will be the result. So we pass back result to parent, then to sibling (class display component)
 type ClassSearchState = { code: string; };
+type ClassSearchProps = { callback: any; };
 
-export class ClassSearch extends React.Component<{}, ClassSearchState> {
-    constructor(props: any) {
+export class ClassSearch extends React.Component<ClassSearchProps, ClassSearchState> {
+    constructor(props: ClassSearchProps) {
         super(props);
         this.state = {
             code: ''
@@ -18,7 +19,7 @@ export class ClassSearch extends React.Component<{}, ClassSearchState> {
                 return response.json();
             })
             .then( (jsonResponse) => {
-                console.log(JSON.stringify(jsonResponse));
+                this.props.callback(jsonResponse);
             });
     }
 
