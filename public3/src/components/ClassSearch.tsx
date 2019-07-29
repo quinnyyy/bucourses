@@ -1,5 +1,6 @@
 import * as React from "react";
 
+// Maybe later the props will be the result. So we pass back result to parent, then to sibling (class display component)
 type ClassSearchState = { code: string; };
 
 export class ClassSearch extends React.Component<{}, ClassSearchState> {
@@ -11,7 +12,14 @@ export class ClassSearch extends React.Component<{}, ClassSearchState> {
 
     }
     private handleSubmit = (): void => {
-        alert(this.state.code);
+        let fetchString: string = 'http://localhost:3000/class?code=' + this.state.code;
+        fetch(fetchString)
+            .then(( response ) => {
+                return response.json();
+            })
+            .then( (jsonResponse) => {
+                console.log(JSON.stringify(jsonResponse));
+            });
     }
 
     private handleChange = (event: any): void => {
@@ -21,10 +29,8 @@ export class ClassSearch extends React.Component<{}, ClassSearchState> {
     render() {
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
                     Class Code: <input type="text" value={this.state.code} onChange={this.handleChange}></input>
-                    <input type="submit" value="Search" />
-                </form>
+                    <button type="button" onClick={this.handleSubmit} className="ht-tm-element btn btn-primary">Search</button>
             </div>
         )
     }
