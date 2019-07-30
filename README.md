@@ -11,6 +11,8 @@
 ## Things we need to add to the course schema:
 * Actual class name (lul)
 * Level (0--,1--,2-- etc.)
+* College e.g. Engineering, Arts and Sciences, Questrom / ENG, CAS, QST
+* Department e.g. Electrical and Computer Engineering, Computer Science / EC CS
 * Other stuff as we see fit
 
 ## /scraper
