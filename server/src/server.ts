@@ -15,12 +15,15 @@ var courseInfo: any;
 
 app.get('/class', (req, res) => {
     let code: string | undefined = req.query.code;
-    let limit: number | undefined = Number(req.query.limit);
+    let limit: number | undefined = isUndefined(req.query.limit) ? undefined : Number(req.query.limit);
+    let credits: number | undefined = isUndefined(req.query.credits) ? undefined : Number(req.query.credits);
 
-    console.log(limit);
+    console.log(code);
+    console.log(req.query.limit);
+    console.log(credits);
 
     if (isUndefined(code) && isUndefined(limit)) {
-        throw new Error('Invalid query. Please specify code or limit');
+        throw new Error('Invalid query. Please specify field');
     }
 
     else if (!isUndefined(code)) {
@@ -33,7 +36,12 @@ app.get('/class', (req, res) => {
     }
 
     else if (!isUndefined(limit)) {
-        courseInfo.find().sort({Code: 1}).limit(limit).toArray( (err: any, result: any) => {
+        let filter : any = {};
+        if (!isUndefined(credits)) {
+            filter.Credits = String(credits);
+        }
+        console.log(filter);
+        courseInfo.find(filter).sort({Code: 1}).limit(limit).toArray( (err: any, result: any) => {
             if (err)
                 throw err;
             res.send(result);

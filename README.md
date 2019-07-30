@@ -5,6 +5,7 @@
 
 ## TODO:
 * server/server.ts: Add filter functionality
+* We saved # of credits as a string to the database. We should try to save it as a number.
 * server/server.ts: Do error handling
 * public3/src/components: Define a type to represent a classinfo
 
