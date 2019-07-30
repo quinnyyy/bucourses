@@ -2,6 +2,12 @@
 
 [![Build Status](https://travis-ci.org/quinnyyy/bucourses.svg?branch=master)](https://travis-ci.org/quinnyyy/bucourses)
 
+
+## TODO:
+* server/server.ts: Add filter functionality
+* server/server.ts: Do error handling
+* public3/src/components: Define a type to represent a classinfo
+
 ## /scraper
 **Python** code for scraping course info from https://www.bu.edu/academics/cas/courses/ using **BeautifulSoup4**  
 Writes the scraped info to text file and then writes data from text file to **MongoDB Atlas** database.
@@ -12,3 +18,4 @@ The server opens a connection to **MongoDB Atlas** database and when an api call
 
 ## Frontend...
 Planning to use **React, Redux, Webpack, Babel**...
+

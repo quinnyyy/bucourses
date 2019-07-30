@@ -15,7 +15,7 @@ export class ClassBundle extends React.Component<null,ClassBundleState> {
         }
     };
 
-    getClassData = (data: object): void => {
+    private getClassData = (data: object): void => {
         this.setState({ classInfo: data , isLoading: false });
     }
 

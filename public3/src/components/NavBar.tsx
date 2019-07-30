@@ -1,6 +1,7 @@
 import * as React from "react";
+import { Link } from 'react-router-dom';
 
-// State should be which link we're on right now
+// State should be which link we're on right now probably
 
 export class NavBar extends React.Component<{},{}> {
     constructor(props: any) {
@@ -20,9 +21,9 @@ export class NavBar extends React.Component<{},{}> {
                 <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul className="navbar-nav mr-auto mt-2 mt-md-0">
                         <li className="nav-item active">
-                            <a className="nav-link" href="#!">Courses
+                            <Link className="nav-link" to='/search'>Courses
                                 <span className="sr-only">(current)</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#!">Link</a>

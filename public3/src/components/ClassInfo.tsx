@@ -25,6 +25,8 @@ export class ClassInfo extends React.Component<ClassInfoProps,{}> {
                     Credits: {this.props.classInfo.Credits}
                     <br/>
                     Description: {this.props.classInfo.Description}
+                    <br/>
+                    Prerequisites: {this.props.classInfo.Prerequisites}
                 </div>
             )
         }
