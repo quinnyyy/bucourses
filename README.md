@@ -10,10 +10,10 @@
 * public3/src/components: Define a type to represent a classinfo
 
 ## Things we need to add to the course schema:
-* Actual class name (lul)
+* ~~Actual class name~~ 
 * Level (0--,1--,2-- etc.)
-* College e.g. Engineering, Arts and Sciences, Questrom / ENG, CAS, QST
-* Department e.g. Electrical and Computer Engineering, Computer Science / EC CS
+* ~~College e.g. Engineering, Arts and Sciences, Questrom / ENG, CAS, QST~~
+* Department e.g. Electrical and Computer Engineering, Computer Science / EC CS. This actually isn't trivial because it's not listed on the page anywhere... have to parse the course code and map it i guess... really a lot of work !!! :)
 * Other stuff as we see fit
 
 ## /scraper

@@ -35,6 +35,13 @@ Helper Functions to find Course Details
 '''
 
 
+def findClassName(soup):
+    containerDiv = soup.find('div', {'class': 'breadcrumbs-wrapper'}).parent
+    className = containerDiv.find('h1', recrusive=False).contents[0]
+
+    return className
+
+
 def findDescription(courseContentDiv):
     descriptionBox = courseContentDiv.find('p', recursive=False).contents
     description = descriptionBox[0] if len(descriptionBox) != 0 else ''
@@ -104,23 +111,51 @@ def findCourseSections(courseContentDiv):
 def getClassDetails(code):
     urlFront = 'https://www.bu.edu/academics/'
     urlBack = '/courses/'
-    college = code.split('-')[0]
-    if college == 'qst':
-        college = 'questrom'
-    elif college == 'med':
-        college = 'busm'
-    elif college == 'sed':
-        college = 'wheelock'
-    url = urlFront + college + urlBack + code
+    college = urlCollege = code.split('-')[0]
+    if urlCollege == 'qst':
+        urlCollege = 'questrom'
+    elif urlCollege == 'med':
+        urlCollege = 'busm'
+    elif urlCollege == 'sed':
+        urlCollege = 'wheelock'
+    url = urlFront + urlCollege + urlBack + code
     soup = getSoup(url)
     courseContentDiv = soup.find("div", {"id": "course-content"})
 
+    mapCollege = {
+        'khc': 'Kilachand Honors College',
+        'cas': 'Arts and Sciences',
+        'com': 'Communication',
+        'eng': 'Engineering',
+        'cfa': 'Fine Arts',
+        'cgs': 'General Studies',
+        'sar': 'Sargeant',
+        'gms': 'Graduate Medical Sciences',
+        'grs': 'Graduate Arts and Sciences',
+        'sdm': 'Dental Medicine',
+        'met': 'Metropolitan College',
+        'qst': 'Questrom',
+        'sha': 'Hospitality Administration',
+        'law': 'Law',
+        'busm': 'Medicine',
+        'sph': 'Public Health',
+        'ssw': 'Social Work',
+        'sth': 'Theology',
+        'sed': 'Wheelock'
+    }
+
+    college = mapCollege[college]
+
+    className = findClassName(soup)
     description = findDescription(courseContentDiv)
     hubList = findHubList(courseContentDiv)
     credits, prerequisites = findCreditsPrereqs(courseContentDiv)
+    credits = "Var" if credits == "Var" else float(credits)
     sections = findCourseSections(courseContentDiv)
 
     courseDictionary = {'Code': code,
+                        'ClassName': className,
+                        'College': college,
                         'Description': description,
                         'HubList': hubList,
                         'Credits': credits,
