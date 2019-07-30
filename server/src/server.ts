@@ -17,6 +17,8 @@ app.get('/class', (req, res) => {
     let code: string | undefined = req.query.code;
     let limit: number | undefined = isUndefined(req.query.limit) ? undefined : Number(req.query.limit);
     let credits: number | undefined = isUndefined(req.query.credits) ? undefined : Number(req.query.credits);
+    let college: string | undefined = req.query.college;
+    let className: string | undefined = req.query.className;
 
     console.log(code);
     console.log(req.query.limit);
@@ -37,8 +39,14 @@ app.get('/class', (req, res) => {
 
     else if (!isUndefined(limit)) {
         let filter : any = {};
+        if (!isUndefined(className)) {
+            filter.ClassName = className;
+        }
         if (!isUndefined(credits)) {
-            filter.Credits = String(credits);
+            filter.Credits = credits;
+        }
+        if (!isUndefined(college)) {
+            filter.College = college;
         }
         console.log(filter);
         courseInfo.find(filter).sort({Code: 1}).limit(limit).toArray( (err: any, result: any) => {

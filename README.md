@@ -9,6 +9,7 @@
 * server/server.ts: Do error handling
 * public3/src/components: Define a type to represent a classinfo
 * scraper/saveClassInfo.py: Make it so that if the scraper fails at any time to handle the error and instead of crashing, save the course code that failed to a log file
+* public3/src/components/Filter: fix the checkboxes and put them in a list
 
 ## Things we need to add to the course schema:
 * ~~Actual class name~~ 
