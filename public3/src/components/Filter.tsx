@@ -23,6 +23,14 @@ const Colleges : Array<string> = [
     'Theology'
 ];
 
+const CreditOptions : Array<string> = [
+    '0-1',
+    '2',
+    '3',
+    '4',
+    '5+'
+]
+
 const dropdownListStyle: any = {
     height: '300px',
     overflowX: 'hidden',
@@ -59,8 +67,8 @@ export class Filter extends React.Component<{},{}> {
                             Colleges.map( (college, i) => {
                                 return (
                                     <li className="custom-control custom-checkbox dropdown-item" key={i}>
-                                        <input type="checkbox" className="custom-control-input" id={"customCheck" + i}/>
-                                        <label className="custom-control-label" htmlFor={"customCheck" + i}>{college}</label>
+                                        <input type="checkbox" className="custom-control-input" id={"collegeOptionCheck" + i}/>
+                                        <label className="custom-control-label" htmlFor={"collegeOptionCheck" + i}>{college}</label>
                                     </li>
                                 )
                             })
@@ -72,6 +80,19 @@ export class Filter extends React.Component<{},{}> {
                 Department
                 <br/>
                 Credits
+                <br/>
+                <ul style={{listStyle : "none"}}>
+                    {
+                    CreditOptions.map( (option, i) => {
+                        return (
+                            <li className="custom-control custom-checkbox dropdown-item" key={i}>
+                                <input type="checkbox" className="custom-control-input" id={"creditOptionCheck" + i}/>
+                                <label className="custom-control-label" htmlFor={"creditOptionCheck" + i}>{option}</label>
+                            </li>
+                        )
+                    })
+                    }
+                </ul>
             </div>
         )
     }

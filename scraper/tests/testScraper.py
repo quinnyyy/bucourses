@@ -23,6 +23,7 @@ def testGetNumPages():
     url = "https://www.bu.edu/academics/eng/courses"
     minPages = 20
     numPages = scraper.getNumPages(url)
+    print(numPages)
     assert numPages >= minPages, "Does not have more than 20 pages"
 
 
