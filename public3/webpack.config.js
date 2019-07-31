@@ -2,6 +2,7 @@ module.exports = {
     mode: "production",
 
     // Enable sourcemaps for debugging webpack's output.
+    // Change this to false later to get rid of warning
     devtool: "source-map",
 
     resolve: {

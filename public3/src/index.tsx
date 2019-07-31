@@ -2,6 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Route, Link, Switch, BrowserRouter as Router } from 'react-router-dom'
 import '../growth/css/bootstrap4-growth.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js';
 
 import { ClassInfo } from "./components/ClassInfo";
 import { TestHome } from "./components/TestHome";

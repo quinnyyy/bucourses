@@ -137,7 +137,7 @@ def getClassDetails(code):
         'qst': 'Questrom',
         'sha': 'Hospitality Administration',
         'law': 'Law',
-        'busm': 'Medicine',
+        'med': 'Medicine',
         'sph': 'Public Health',
         'ssw': 'Social Work',
         'sth': 'Theology',

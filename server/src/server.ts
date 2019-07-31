@@ -8,10 +8,14 @@ app.use(cors());
 var courseInfo: any;
 
 
-// Current spec for this endpoint:
-// If a class code is specified query for one class with this code
-// If a class code is not specified but a limit is specified then give the first n classes
-// If neither is specified throw an error
+// Example query: /class?limit=10&college=Engineering&creditsMax=3&creditsMin=0
+// Get 10 classes, college = Engineering, 0 < # of credits < 3
+
+// Example query: /class?code=cas-cs-131
+// Get the class with code = cas-cs-131
+
+// example query: /class?limit=10&credits=4
+// Get 10 classes that are 4 credits
 
 app.get('/class', (req, res) => {
     let code: string | undefined = req.query.code;
@@ -19,10 +23,8 @@ app.get('/class', (req, res) => {
     let credits: number | undefined = isUndefined(req.query.credits) ? undefined : Number(req.query.credits);
     let college: string | undefined = req.query.college;
     let className: string | undefined = req.query.className;
-
-    console.log(code);
-    console.log(req.query.limit);
-    console.log(credits);
+    let creditsMax: number | undefined = isUndefined(req.query.creditsMax) ? undefined : Number(req.query.creditsMax);
+    let creditsMin: number | undefined = isUndefined(req.query.creditsMin) ? undefined : Number(req.query.creditsMin);
 
     if (isUndefined(code) && isUndefined(limit)) {
         throw new Error('Invalid query. Please specify field');
@@ -44,6 +46,12 @@ app.get('/class', (req, res) => {
         }
         if (!isUndefined(credits)) {
             filter.Credits = credits;
+        } else if (!isUndefined(creditsMin) && !isUndefined(creditsMax)) {
+            filter.Credits = {$gte: creditsMin, $lte: creditsMax};
+        } else if (!isUndefined(creditsMin)) {
+            filter.Credits = {$gte: creditsMin};
+        } else if (!isUndefined(creditsMax)) {
+            filter.Credits = {$lte: creditsMax};
         }
         if (!isUndefined(college)) {
             filter.College = college;
