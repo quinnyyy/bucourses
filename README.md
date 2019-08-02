@@ -21,6 +21,11 @@
 * Department e.g. Electrical and Computer Engineering, Computer Science / EC CS. This actually isn't trivial because it's not listed on the page anywhere... have to parse the course code and map it i guess... really a lot of work !!! :)
 * Other stuff as we see fit
 
+## Other features
+* Resume upload + feedback
+* Class swap marketplace
+* Teacher/class helpful info db
+
 ## /scraper
 **Python** code for scraping course info from https://www.bu.edu/academics/cas/courses/ using **BeautifulSoup4**  
 Writes the scraped info to text file and then writes data from text file to **MongoDB Atlas** database.

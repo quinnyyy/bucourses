@@ -16,7 +16,9 @@ export class NavBar extends React.Component<{},{}> {
                 aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <a className="navbar-brand" href="#!">BUcourses</a>
+                <Link className="navbar-brand" to='/'>
+                    BUcourses
+                </Link>
 
                 <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul className="navbar-nav mr-auto mt-2 mt-md-0">
