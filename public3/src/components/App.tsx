@@ -11,7 +11,7 @@ export class App extends React.Component<{},{}> {
         return (
             <React.Fragment>
                 <NavBar/>
-                <Dropdown options={['hello', 'world', 'ur', 'mom', 'gay']}/>
+                <Dropdown options={['option 1', 'option 2', 'option 3', 'option 4', 'option 5']} identifier={'colleges-identifier'}/>
             </React.Fragment>
         )
         
