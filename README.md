@@ -13,6 +13,7 @@
 * ~~public3/src/components/Filter: fix the checkboxes and put them in a list~~
 * public3/src/components/Filter: Add state functionality and api call based on state. Figure out what best pattern is for filtering behavior
 * public3/src/components/Filter: style/size the filter component
+* public3/src/components/Dropdown: Make the checked options show up under your dropdown
 
 ## Things we need to add to the course schema:
 * ~~Actual class name~~ 

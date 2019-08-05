@@ -3,7 +3,7 @@ import { Checkbox } from './Checkbox';
 import * as $ from 'jquery';
 
 interface checkedMap {[key: string] : boolean};
-type DropdownProps = { options: Array<string>; identifier: string};
+type DropdownProps = { name: string; options: Array<string>; identifier: string};
 type DropdownState = { showing: boolean; checkedOptions: checkedMap};
 
 export class Dropdown extends React.Component<DropdownProps,DropdownState> {
@@ -34,7 +34,7 @@ export class Dropdown extends React.Component<DropdownProps,DropdownState> {
             } else {
                 return false;
             }
-            
+
         })
     }
 
@@ -49,7 +49,7 @@ export class Dropdown extends React.Component<DropdownProps,DropdownState> {
                 <div className="btn-group">
                     <button type="button" className="btn btn-primary dropdown-toggle" 
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Action
+                        {this.props.name}
                     </button>
                     <div className="dropdown-menu" x-placement="bottom-start" style={{position: "absolute", transform: "translate3d(0px, 38px, 0px)", top: "0px", left: "0px", willChange: "transform"}}>
                     <form>
