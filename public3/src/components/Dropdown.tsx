@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Checkbox } from './Checkbox';
 import * as $ from 'jquery';
+import { DropdownChecklist } from '../styles/DropdownStyles';
 
 interface checkedMap {[key: string] : boolean};
 type DropdownProps = { name: string; options: Array<string>; identifier: string};
@@ -46,7 +47,7 @@ export class Dropdown extends React.Component<DropdownProps,DropdownState> {
 
         render() {
             return (
-                <div className="btn-group">
+                <div style={DropdownChecklist} className="btn-group">
                     <button type="button" className="btn btn-primary dropdown-toggle" 
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {this.props.name}

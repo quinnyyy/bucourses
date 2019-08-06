@@ -1,5 +1,7 @@
 import * as React from "react";
 import { SingleClass } from "../types/SingleClassType";
+import { SingleClassDisplay} from "./SingleClassDisplay";
+import { ClassListContainer } from "../styles/ClassListStyles";
 
 type ClassListState = { classes : Array<SingleClass> ; isLoading : boolean};
 
@@ -41,13 +43,17 @@ export class ClassList extends React.Component<{},ClassListState> {
             )
         } else {
             return (
-                <ul>
-                    {this.state.classes.map( (classInfo : SingleClass, i : number) => {
-                        return (
-                            <li key={i}>{classInfo.ClassName}</li>
-                        )   
-                    })}
-                </ul>
+                <div style={ClassListContainer}>
+                    <ul>
+                        {this.state.classes.map( (classInfo : SingleClass, i : number) => {
+                            return (
+                                <li style={{listStyle : "none"}} key={i}>
+                                    <SingleClassDisplay classInfo={classInfo}/>
+                                </li>
+                            )   
+                        })}
+                    </ul>
+                </div>
             )
         }
     }

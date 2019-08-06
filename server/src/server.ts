@@ -56,7 +56,6 @@ app.get('/class', (req, res) => {
         if (!isUndefined(college)) {
             filter.College = college;
         }
-        console.log(filter);
         courseInfo.find(filter).sort({Code: 1}).limit(limit).toArray( (err: any, result: any) => {
             if (err)
                 throw err;

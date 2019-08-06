@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { Dropdown } from "./Dropdown";
+import { FilterContainer } from '../styles/FilterStyles';
 
 const Colleges : Array<string> = [
     'Arts and Sciences',
@@ -36,7 +37,7 @@ export class Filter2 extends React.Component<{},{}> {
 
     render() {
         return (
-            <div>
+            <div style={FilterContainer}>
 
                 <Dropdown name="Filter by College..." options={Colleges} identifier={'college-identifier'}/>
                 <Dropdown name="Filter by Credits..." options={CreditOptions} identifier={'credit-options-identifier'}/>
