@@ -17,7 +17,7 @@ export class SingleClassDisplay extends React.Component<SingleClassDisplayProps,
                 <h4 style={Styles.ClassName}>{this.props.classInfo.ClassName}</h4>
                 <h5 style={Styles.Code}>{newCode}</h5>
                 <h5 style={Styles.College}>{this.props.classInfo.College}</h5>
-                <h5 style={Styles.Credits}>{this.props.classInfo.Credits}</h5>
+                <h5 style={Styles.Credits}>{this.props.classInfo.Credits} Credits</h5>
                 <h6 style={Styles.Description}>{this.props.classInfo.Description}</h6>
             </div>
         )

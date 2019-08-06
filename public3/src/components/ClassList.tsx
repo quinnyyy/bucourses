@@ -16,7 +16,8 @@ export class ClassList extends React.Component<{},ClassListState> {
     }
 
     componentDidMount() {
-        let query : string = '/class?limit=10';
+        //let query : string = '/class?limit=10';
+        let query : string = '/class?limit=10&college=Engineering'
         fetch('http://localhost:3000' + query)
             .then( res => {
                 if (res.ok) {
