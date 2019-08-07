@@ -1,10 +1,10 @@
 import * as React from "react";
 import { Checkbox } from './Checkbox';
 import * as $ from 'jquery';
-import { DropdownChecklist, DropdownButton } from '../styles/DropdownStyles';
+import { DropdownChecklist, DropdownButton , DropdownListDiv} from '../styles/DropdownStyles';
 
 interface checkedMap {[key: string] : boolean};
-type DropdownProps = { name: string; options: Array<string>; identifier: string};
+type DropdownProps = { name: string; options: Array<string>; identifier: string; };
 type DropdownState = { showing: boolean; checkedOptions: checkedMap};
 
 export class Dropdown extends React.Component<DropdownProps,DropdownState> {
@@ -52,7 +52,7 @@ export class Dropdown extends React.Component<DropdownProps,DropdownState> {
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {this.props.name}
                     </button>
-                    <div className="dropdown-menu" x-placement="bottom-start" style={{position: "absolute", transform: "translate3d(0px, 38px, 0px)", top: "0px", left: "0px", willChange: "transform"}}>
+                    <div className="dropdown-menu" x-placement="bottom-start" style={DropdownListDiv}>
                     <form>
                     <ul className={this.props.identifier}>
                         {

@@ -21,10 +21,12 @@ app.get('/class', (req, res) => {
     let code: string | undefined = req.query.code;
     let limit: number | undefined = isUndefined(req.query.limit) ? undefined : Number(req.query.limit);
     let credits: number | undefined = isUndefined(req.query.credits) ? undefined : Number(req.query.credits);
-    let college: string | undefined = req.query.college;
+    let college: string | Array<string> | undefined = req.query.college;
     let className: string | undefined = req.query.className;
     let creditsMax: number | undefined = isUndefined(req.query.creditsMax) ? undefined : Number(req.query.creditsMax);
     let creditsMin: number | undefined = isUndefined(req.query.creditsMin) ? undefined : Number(req.query.creditsMin);
+
+    console.log(college);
 
     if (isUndefined(code) && isUndefined(limit)) {
         throw new Error('Invalid query. Please specify field');
@@ -44,6 +46,7 @@ app.get('/class', (req, res) => {
         if (!isUndefined(className)) {
             filter.ClassName = className;
         }
+
         if (!isUndefined(credits)) {
             filter.Credits = credits;
         } else if (!isUndefined(creditsMin) && !isUndefined(creditsMax)) {
@@ -53,9 +56,15 @@ app.get('/class', (req, res) => {
         } else if (!isUndefined(creditsMax)) {
             filter.Credits = {$lte: creditsMax};
         }
+
         if (!isUndefined(college)) {
-            filter.College = college;
+            if (typeof(college) == 'string') {
+                filter.College = college;
+            } else {
+                filter.College = {$in: college};
+            }
         }
+
         courseInfo.find(filter).sort({Code: 1}).limit(limit).toArray( (err: any, result: any) => {
             if (err)
                 throw err;

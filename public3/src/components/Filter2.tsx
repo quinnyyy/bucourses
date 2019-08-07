@@ -33,7 +33,36 @@ const CreditOptions : Array<string> = [
     '5+'
 ]
 
-export class Filter2 extends React.Component<{},{}> {
+interface checkedMap {[key: string] : boolean};
+interface queryParameters {[key: string] : Array<any>};
+
+type Filter2State = { queryObject: queryParameters };
+
+export class Filter2 extends React.Component<{},Filter2State> {
+    constructor(props: {}) {
+        super(props);
+
+        let queryObject : queryParameters = {
+            Colleges : [],
+            CreditOptions : []
+        }
+
+        this.state = {
+            queryObject : queryObject
+        }
+    }
+
+    private setQueryFromDropdown = (dropdownState : checkedMap, queryCategory : string) : void => {
+        console.log('parse and fill in here :)')
+    }
+
+    /* template to remind how to do this
+    private setCheckedOption = (option : string, checked : boolean) : void => {
+        let updatedCheckedOptions : checkedMap = Object.assign({}, this.state.checkedOptions, {[option]: checked});
+        console.log(updatedCheckedOptions);
+        this.setState({checkedOptions : updatedCheckedOptions});
+    }
+    */
 
     render() {
         return (
