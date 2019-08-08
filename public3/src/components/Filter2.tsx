@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { Dropdown } from "./Dropdown";
+import { SingleClass } from "../types/SingleClassType";
 import { FilterContainer } from '../styles/FilterStyles';
 
 const Colleges : Array<string> = [
@@ -37,14 +38,15 @@ interface checkedMap {[key: string] : boolean};
 interface queryParameters {[key: string] : Array<any>};
 
 type Filter2State = { queryObject: queryParameters };
+type Filter2Props = { callback : ( newCurrentSelections : Array<SingleClass> ) => void};
 
-export class Filter2 extends React.Component<{},Filter2State> {
-    constructor(props: {}) {
+export class Filter2 extends React.Component<Filter2Props,Filter2State> {
+    constructor(props: Filter2Props) {
         super(props);
 
         let queryObject : queryParameters = {
-            Colleges : [],
-            CreditOptions : []
+            College : [],
+            Credits : []
         }
 
         this.state = {
@@ -53,28 +55,52 @@ export class Filter2 extends React.Component<{},Filter2State> {
     }
 
     private setQueryFromDropdown = (dropdownState : checkedMap, queryCategory : string) : void => {
-        console.log('parse and fill in here :)')
+        let newQuery : string[] = [];
+        Object.keys(dropdownState).forEach( (college) => {
+            if (dropdownState[college] == true) {
+                newQuery.push(college);
+            }
+        });
+
+        let updatedQueryObject : queryParameters = Object.assign({}, this.state.queryObject, {[queryCategory]: newQuery});
+        this.setState({ queryObject : updatedQueryObject}, this.sendGetRequest);
     }
 
-    /* template to remind how to do this
-    private setCheckedOption = (option : string, checked : boolean) : void => {
-        let updatedCheckedOptions : checkedMap = Object.assign({}, this.state.checkedOptions, {[option]: checked});
-        console.log(updatedCheckedOptions);
-        this.setState({checkedOptions : updatedCheckedOptions});
+    private getParameterString = (Parameter : string) : string => {
+        let ParameterString : string = "";
+        this.state.queryObject[Parameter].forEach( (element : string) => {
+            ParameterString += ('&' + Parameter.toLowerCase() + '=' + element);
+        })
+        return ParameterString;
     }
-    */
+
+    private sendGetRequest = () : void => {
+        let host : string = 'http://localhost:3000';
+        console.log(this.getParameterString('College'));
+        let query : string = '/class?limit=10' + this.getParameterString('College');
+        fetch(host + query)
+            .then( res => {
+                if(res.ok) {
+                    return res.json();
+                } else {
+                    throw new Error('Could not connect');
+                }
+            })
+            .then( resJson => {
+                this.props.callback(resJson);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
 
     render() {
         return (
             <div style={FilterContainer}>
-
-                <Dropdown name="Filter by College..." options={Colleges} identifier={'college-identifier'}/>
-                <Dropdown name="Filter by Credits..." options={CreditOptions} identifier={'credit-options-identifier'}/>
-
+                <Dropdown name="Filter by College..." options={Colleges} identifier={'College'} propogateState={this.setQueryFromDropdown}/>
+                <Dropdown name="Filter by Credits..." options={CreditOptions} identifier={'Credits'} propogateState={this.setQueryFromDropdown}/>
             </div>
-
         )
-
     }
 
 

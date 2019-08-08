@@ -4,7 +4,7 @@ import * as $ from 'jquery';
 import { DropdownChecklist, DropdownButton , DropdownListDiv} from '../styles/DropdownStyles';
 
 interface checkedMap {[key: string] : boolean};
-type DropdownProps = { name: string; options: Array<string>; identifier: string; };
+type DropdownProps = { name: string; options: Array<string>; identifier: string; propogateState : (dropdownState : checkedMap, queryCategory : string) => void };
 type DropdownState = { showing: boolean; checkedOptions: checkedMap};
 
 export class Dropdown extends React.Component<DropdownProps,DropdownState> {
@@ -41,8 +41,7 @@ export class Dropdown extends React.Component<DropdownProps,DropdownState> {
 
     private setCheckedOption = (option : string, checked : boolean) : void => {
         let updatedCheckedOptions : checkedMap = Object.assign({}, this.state.checkedOptions, {[option]: checked});
-        console.log(updatedCheckedOptions);
-        this.setState({checkedOptions : updatedCheckedOptions});
+        this.setState({checkedOptions : updatedCheckedOptions}, () => this.props.propogateState(this.state.checkedOptions, this.props.identifier));
     }
 
         render() {
