@@ -11,6 +11,7 @@ import { NavBar } from "./components/NavBar";
 import { App } from "./components/App";
 import { ClassBundle } from "./components/ClassBundle";
 import { ClassPage } from './components/ClassPage';
+import { ClassTopLevel } from "./components/ClassTopLevel";
 
 //npx webpack to run and then open index.html
 //npm start runs webpack and starts server
@@ -18,9 +19,10 @@ import { ClassPage } from './components/ClassPage';
 const routing = (
     <Router>
       <div>
+        <NavBar/>
         <Switch>
           <Route path="/class/:code" component={ClassPage}/>
-          <Route path="/" component={App} />
+          <Route path="/" component={ClassTopLevel} />
         </Switch>
       </div>
     </Router>
