@@ -15,6 +15,7 @@
 * ~~public3/src/components/Filter: style/size the filter component~~
 * public3/src/components/Dropdown: Make the checked options show up under your dropdown
 * public3/src/components/Filter or ClassTopLevel: Get the credits hooked up. I think it is best idea to process client side and keep the API as is
+* public3/src/components: Make a function to do API calls
 
 ## Things we need to add to the course schema:
 * ~~Actual class name~~ 

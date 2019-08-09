@@ -108,10 +108,23 @@ def findCourseSections(courseContentDiv):
     return sections
 
 
+def getDepartmentList(soup):
+    courseFilterDiv = soup.find("div", {'class': 'course-filter'})
+    liList = courseFilterDiv.find("ul").find("li").find_all("li")
+    departmentList = []
+    for li in liList:
+        a = li.find("a")
+        department = a.contents[0]
+        if department != 'All Departments':
+            departmentList.append(department)
+    return departmentList
+
+
 def getClassDetails(code):
     urlFront = 'https://www.bu.edu/academics/'
     urlBack = '/courses/'
     college = urlCollege = code.split('-')[0]
+    level = int(code.split('-')[2])
     if urlCollege == 'qst':
         urlCollege = 'questrom'
     elif urlCollege == 'med':
@@ -156,6 +169,7 @@ def getClassDetails(code):
     courseDictionary = {'Code': code,
                         'ClassName': className,
                         'College': college,
+                        'Level': level,
                         'Description': description,
                         'HubList': hubList,
                         'Credits': credits,
