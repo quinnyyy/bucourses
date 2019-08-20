@@ -1,6 +1,12 @@
+var path = require('path');
+
 module.exports = {
     mode: "production",
-
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'main.js',
+        publicPath: '/'
+    },
     // Enable sourcemaps for debugging webpack's output.
     // Change this to false later to get rid of warning
     devtool: "source-map",

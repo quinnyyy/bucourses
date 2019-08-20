@@ -14,7 +14,6 @@ export class App extends React.Component<{},{}> {
     render() {
         return (
             <React.Fragment>
-                <NavBar/>
                 <ClassTopLevel/>
             </React.Fragment>
         )
