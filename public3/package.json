@@ -24,6 +24,8 @@
     "webpack-cli": "^3.3.6"
   },
   "dependencies": {
+    "@types/gapi": "0.0.39",
+    "@types/gapi.auth2": "0.0.50",
     "@types/jquery": "^3.3.30",
     "@types/react-router-dom": "^4.3.4",
     "bootstrap": "^4.3.1",

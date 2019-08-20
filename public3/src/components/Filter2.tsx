@@ -3,6 +3,7 @@ import * as React from "react";
 import { Dropdown } from "./Dropdown";
 import { SingleClass } from "../types/SingleClassType";
 import { FilterContainer } from '../styles/FilterStyles';
+import { string } from "prop-types";
 
 const Colleges : Array<string> = [
     'Arts and Sciences',
