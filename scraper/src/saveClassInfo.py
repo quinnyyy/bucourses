@@ -18,9 +18,10 @@ if __name__ == "__main__":
     classNames = fileIO.readClassNames('classnames.txt')
     classCodes = list(map(fileIO.parseClassNames, classNames))
 
-    for i, classCode in enumerate(classCodes):
+    for i, classCode in enumerate(classCodes[5745:len(classCodes)]):
         print(classCode)
         print(i)
+        
         classInfo = scraper.getClassDetails(classCode)
         courseInfo.update_one({"Code": classCode},
                               {"$set": classInfo},

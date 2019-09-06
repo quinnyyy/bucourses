@@ -33,7 +33,16 @@ const CreditOptions : Array<string> = [
     '3',
     '4',
     '5+'
-]
+];
+
+const Level : Array<string> = [
+    '000',
+    '100',
+    '200',
+    '300',
+    '400',
+    '500+'
+];
 
 interface checkedMap {[key: string] : boolean};
 interface queryParameters {[key: string] : Array<any>};
@@ -48,7 +57,9 @@ export class Filter2 extends React.Component<Filter2Props,Filter2State> {
         let queryObject : queryParameters = {
             College : [],
             Credits : [],
-            CreditsMin: []
+            CreditsMin: [],
+            Level: [],
+            LevelMin: []
         }
 
         this.state = {
@@ -87,9 +98,26 @@ export class Filter2 extends React.Component<Filter2Props,Filter2State> {
         });
         let updatedQueryObject : queryParameters = Object.assign({}, this.state.queryObject, {[queryCategory]: newQuery, ['CreditsMin']: newQuery2});
         this.setState({ queryObject: updatedQueryObject}, this.sendGetRequest);
-        console.log(this.getParameterString("CreditsMin"));
-        console.log(this.getParameterString("Credits"));
     }
+
+    private setQueryFromDropdownLevels = (dropdownState : checkedMap, queryCategory : string) : void => {
+        let newQuery : string[] = [];
+        let newQuery2 : string[] = [];
+        Object.keys(dropdownState).forEach( (levelOption) => {
+            if (dropdownState[levelOption] == true) {
+                if (levelOption == '500+') {
+                    newQuery2.push('500');
+                }
+                else {
+                    newQuery.push(levelOption);
+                }
+            }
+        });
+        console.log(this.state.queryObject)
+        let updatedQueryObject : queryParameters = Object.assign({}, this.state.queryObject, {[queryCategory]: newQuery, ['LevelMin']: newQuery2});
+        this.setState({ queryObject: updatedQueryObject}, this.sendGetRequest);
+    }
+    
 
     private getParameterString = (Parameter : string) : string => {
         let ParameterString : string = "";
@@ -127,6 +155,7 @@ export class Filter2 extends React.Component<Filter2Props,Filter2State> {
             <div style={FilterContainer}>
                 <Dropdown name="Filter by College..." options={Colleges} identifier={'College'} propogateState={this.setQueryFromDropdown}/>
                 <Dropdown name="Filter by Credits..." options={CreditOptions} identifier={'Credits'} propogateState={this.setQueryFromDropdownCredits}/>
+                <Dropdown name="Filter by Level..." options={Level} identifier={'Level'} propogateState={this.setQueryFromDropdownLevels}/>
             </div>
         )
     }

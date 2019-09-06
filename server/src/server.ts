@@ -19,6 +19,82 @@ var courseInfo: any;
 
 app.get('/class', (req, res) => {
     let code: string | undefined = req.query.code;
+    let limit : number | undefined = parseInt(req.query.limit,10);
+    let college: string | Array<string> | undefined = req.query.college;
+    let credits: Array<number> = Array.isArray(req.query.credits) ? req.query.credits.map( (item : string) => {return parseInt(item,10)}) : [parseInt(req.query.credits,10)];
+    let creditsMin: number | undefined = isUndefined(req.query.creditsmin) ? undefined : Number(req.query.creditsmin);
+    let level : Array<number> = Array.isArray(req.query.level) ? req.query.level.map( (item : string) => {return parseInt(item,10)}) : [parseInt(req.query.level,10)];
+    let levelMin : number | undefined = isUndefined(req.query.levelmin) ? undefined : Number(req.query.levelmin);
+
+    if (!isUndefined(code)) {
+        courseInfo.findOne({Code: code})
+            .then((doc: any) => {
+                if (!doc) {
+                    throw new Error("Couldn't find this class");
+                }
+                res.send(doc);
+            })
+    }
+    else {
+        let filters : Array<any> = [];
+
+        if(!isUndefined(college)) {
+            let filter : any = {};
+            if (typeof(college) == 'string') {
+                filter = {College : college};
+            } else {
+                filter = {College : {$in : college}};
+            }
+            filters.push(filter);
+        }
+
+        if (!isNaN(credits[0]) && !isUndefined(creditsMin)) {
+            filters.push({$or : [{Credits : {$in : credits}}, {Credits: {$gte : creditsMin}}]});
+        }
+        else if (!isNaN(credits[0])) {
+            filters.push({Credits : {$in: credits}});
+        }
+        else if (!isUndefined(creditsMin)) {
+            filters.push({Credits: {$gte : creditsMin}});
+        }
+
+        if (!isNaN(level[0]) || !isUndefined(levelMin)) {
+            let conditions : Array<any> = [];
+
+            if (!isNaN(level[0])) {
+                level.forEach(level => {
+                    conditions.push({Level: {$gte : level, $lt : level + 100}});
+                });
+            }
+
+            if (!isUndefined(levelMin)) {
+                conditions.push({Level: {$gte : levelMin}});
+            }
+            filters.push({$or : conditions});
+        }
+
+        let innerFind : any = filters.length == 0 ? {} : {$and: filters};
+
+        if (!isUndefined(limit)) {
+            courseInfo.find(innerFind).sort({Code: 1}).limit(limit).toArray( (err: any, result: any) => {
+                if (err)
+                    throw err;
+                res.send(result);
+            });
+        }
+        else {
+            courseInfo.find(innerFind).sort({Code: 1}).toArray( (err: any, result: any) => {
+                if (err)
+                    throw err;
+                res.send(result);
+            });
+        }
+        
+    }
+})
+/*
+app.get('/class', (req, res) => {
+    let code: string | undefined = req.query.code;
     let limit: number | undefined = isUndefined(req.query.limit) ? undefined : Number(req.query.limit);
     //let credits: number | undefined = isUndefined(req.query.credits) ? undefined : Number(req.query.credits);
     let credits: Array<number> = Array.isArray(req.query.credits) ? req.query.credits.map( (item : string) => {return parseInt(item,10)}) : [parseInt(req.query.credits,10)];
@@ -26,6 +102,8 @@ app.get('/class', (req, res) => {
     let className: string | undefined = req.query.className;
     //let creditsMax: number | undefined = isUndefined(req.query.creditsMax) ? undefined : Number(req.query.creditsMax);
     let creditsMin: number | undefined = isUndefined(req.query.creditsmin) ? undefined : Number(req.query.creditsmin);
+    let level : Array<number> = Array.isArray(req.query.level) ? req.query.level.map( (item : string) => {return parseInt(item,10)}) : [parseInt(req.query.level,10)];
+    let levelMin : number | undefined = isUndefined(req.query.levelmin) ? undefined : Number(req.query.levelmin);
 
 
     if (isUndefined(code) && isUndefined(limit)) {
@@ -46,18 +124,6 @@ app.get('/class', (req, res) => {
         if (!isUndefined(className)) {
             filter.ClassName = className;
         }
-
-        /*
-        if (!isUndefined(credits)) {
-            filter.Credits = credits;
-        } else if (!isUndefined(creditsMin) && !isUndefined(creditsMax)) {
-            filter.Credits = {$gte: creditsMin, $lte: creditsMax};
-        } else if (!isUndefined(creditsMin)) {
-            filter.Credits = {$gte: creditsMin};
-        } else if (!isUndefined(creditsMax)) {
-            filter.Credits = {$lte: creditsMax};
-        }
-        */
 
         if (!isUndefined(college)) {
             if (typeof(college) == 'string') {
@@ -82,6 +148,22 @@ app.get('/class', (req, res) => {
             filter.Credits = {$gte: creditsMin};
         }
 
+
+        console.log(level);
+        console.log(levelMin);
+
+        let filters : Array<any> = [];
+
+        if (!isNaN(level[0]) && !isUndefined(levelMin)) {
+            filt
+        }
+        else if (!isNaN(level[0])) {
+
+        }
+        else if (!isUndefined(levelMin)) {
+
+        }
+
         if (orFlag) {
             console.log(filter)
             console.log(filter1)
@@ -103,7 +185,7 @@ app.get('/class', (req, res) => {
         }
     }
 });
-
+*/
 app.listen(3000, async () => {
     console.log('example app listening on port 3000!');
     try {
