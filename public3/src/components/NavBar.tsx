@@ -23,7 +23,7 @@ export class NavBar extends React.Component<{},{}> {
 
                 <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul className="navbar-nav mr-auto mt-2 mt-md-0">
-                        <li className="nav-item active">
+                        <li className="nav-item">
                             <Link style={Styles.NavBarLink} className="nav-link" to='/search'>Courses
                                 <span className="sr-only">(current)</span>
                             </Link>
@@ -32,7 +32,7 @@ export class NavBar extends React.Component<{},{}> {
                             <a style={Styles.NavBarLink} className="nav-link" href="#!">Link</a>
                         </li>
                         <li className="nav-item">
-                            <a style={Styles.NavBarLink} className="nav-link disabled" href="#!">Disabled</a>
+                            <Link style={Styles.NavBarLink} className="nav-link" to='/auth'>Sign In</Link>
                         </li>
                     </ul>
                 </div>

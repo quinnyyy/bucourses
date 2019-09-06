@@ -47,7 +47,8 @@ export class Filter2 extends React.Component<Filter2Props,Filter2State> {
 
         let queryObject : queryParameters = {
             College : [],
-            Credits : []
+            Credits : [],
+            CreditsMin: []
         }
 
         this.state = {
@@ -67,6 +68,29 @@ export class Filter2 extends React.Component<Filter2Props,Filter2State> {
         this.setState({ queryObject : updatedQueryObject}, this.sendGetRequest);
     }
 
+    private setQueryFromDropdownCredits = (dropdownState : checkedMap, queryCategory : string) : void => {
+        let newQuery : string[] = [];
+        let newQuery2 : string[] = [];
+        Object.keys(dropdownState).forEach( (creditOption) => {
+            if (dropdownState[creditOption] == true) {
+                if (creditOption == '5+') {
+                    newQuery2.push('5');
+                }
+                else if (creditOption == '0-1') {
+                    newQuery.push('0');
+                    newQuery.push('1');
+                }
+                else {
+                    newQuery.push(creditOption);
+                }
+            }
+        });
+        let updatedQueryObject : queryParameters = Object.assign({}, this.state.queryObject, {[queryCategory]: newQuery, ['CreditsMin']: newQuery2});
+        this.setState({ queryObject: updatedQueryObject}, this.sendGetRequest);
+        console.log(this.getParameterString("CreditsMin"));
+        console.log(this.getParameterString("Credits"));
+    }
+
     private getParameterString = (Parameter : string) : string => {
         let ParameterString : string = "";
         this.state.queryObject[Parameter].forEach( (element : string) => {
@@ -77,8 +101,11 @@ export class Filter2 extends React.Component<Filter2Props,Filter2State> {
 
     private sendGetRequest = () : void => {
         let host : string = 'http://localhost:3000';
-        console.log(this.getParameterString('College'));
-        let query : string = '/class?limit=10' + this.getParameterString('College');
+        let query : string = '/class?limit=100';
+        //let query : string = '/class?limit=10' + this.getParameterString('College');
+        Object.keys(this.state.queryObject).forEach(parameter => {
+            query += this.getParameterString(parameter);
+        });
         fetch(host + query)
             .then( res => {
                 if(res.ok) {
@@ -99,7 +126,7 @@ export class Filter2 extends React.Component<Filter2Props,Filter2State> {
         return (
             <div style={FilterContainer}>
                 <Dropdown name="Filter by College..." options={Colleges} identifier={'College'} propogateState={this.setQueryFromDropdown}/>
-                <Dropdown name="Filter by Credits..." options={CreditOptions} identifier={'Credits'} propogateState={this.setQueryFromDropdown}/>
+                <Dropdown name="Filter by Credits..." options={CreditOptions} identifier={'Credits'} propogateState={this.setQueryFromDropdownCredits}/>
             </div>
         )
     }

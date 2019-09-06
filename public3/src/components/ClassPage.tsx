@@ -7,7 +7,6 @@ type ClassPageState = { code : string; isLoading : boolean; classInfo : SingleCl
 export class ClassPage extends React.Component<any,ClassPageState> {
     constructor(props : any) {
         super(props);        
-
         this.state = {
             code : this.props.match.params.code,
             isLoading : true,

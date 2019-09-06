@@ -20,13 +20,13 @@ var courseInfo: any;
 app.get('/class', (req, res) => {
     let code: string | undefined = req.query.code;
     let limit: number | undefined = isUndefined(req.query.limit) ? undefined : Number(req.query.limit);
-    let credits: number | undefined = isUndefined(req.query.credits) ? undefined : Number(req.query.credits);
+    //let credits: number | undefined = isUndefined(req.query.credits) ? undefined : Number(req.query.credits);
+    let credits: Array<number> = Array.isArray(req.query.credits) ? req.query.credits.map( (item : string) => {return parseInt(item,10)}) : [parseInt(req.query.credits,10)];
     let college: string | Array<string> | undefined = req.query.college;
     let className: string | undefined = req.query.className;
-    let creditsMax: number | undefined = isUndefined(req.query.creditsMax) ? undefined : Number(req.query.creditsMax);
-    let creditsMin: number | undefined = isUndefined(req.query.creditsMin) ? undefined : Number(req.query.creditsMin);
+    //let creditsMax: number | undefined = isUndefined(req.query.creditsMax) ? undefined : Number(req.query.creditsMax);
+    let creditsMin: number | undefined = isUndefined(req.query.creditsmin) ? undefined : Number(req.query.creditsmin);
 
-    console.log(college);
 
     if (isUndefined(code) && isUndefined(limit)) {
         throw new Error('Invalid query. Please specify field');
@@ -47,6 +47,7 @@ app.get('/class', (req, res) => {
             filter.ClassName = className;
         }
 
+        /*
         if (!isUndefined(credits)) {
             filter.Credits = credits;
         } else if (!isUndefined(creditsMin) && !isUndefined(creditsMax)) {
@@ -56,6 +57,7 @@ app.get('/class', (req, res) => {
         } else if (!isUndefined(creditsMax)) {
             filter.Credits = {$lte: creditsMax};
         }
+        */
 
         if (!isUndefined(college)) {
             if (typeof(college) == 'string') {
@@ -65,13 +67,41 @@ app.get('/class', (req, res) => {
             }
         }
 
-        courseInfo.find(filter).sort({Code: 1}).limit(limit).toArray( (err: any, result: any) => {
-            if (err)
-                throw err;
-            res.send(result);
-        });
-    }
+        let orFlag : boolean = false;
+        let filter1: any = JSON.parse(JSON.stringify(filter));
 
+        if (!isNaN(credits[0]) && !isUndefined(creditsMin)) {
+            filter1.Credits = {$in: credits};
+            filter.Credits = {$gte: creditsMin};
+            orFlag = true;
+        }
+        else if (!isNaN(credits[0])) {
+            filter.Credits = {$in: credits};
+        }
+        else if (!isUndefined(creditsMin)) {
+            filter.Credits = {$gte: creditsMin};
+        }
+
+        if (orFlag) {
+            console.log(filter)
+            console.log(filter1)
+            courseInfo.find(
+                {$or: [filter, filter1]}
+            ).sort({Code: 1}).limit(limit).toArray( (err: any, result: any) => {
+                if (err)
+                    throw err;
+                res.send(result);
+            })
+        }
+        else {
+            console.log('deez nuts')
+            courseInfo.find(filter).sort({Code: 1}).limit(limit).toArray( (err: any, result: any) => {
+                if (err)
+                    throw err;
+                res.send(result);
+            });
+        }
+    }
 });
 
 app.listen(3000, async () => {
