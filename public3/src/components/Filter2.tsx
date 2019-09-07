@@ -44,6 +44,32 @@ const Level : Array<string> = [
     '500+'
 ];
 
+const Hub : Array<string> = [
+    'Aesthetic Exploration',
+    'Creativity/Innovation',
+    'Critical Thinking',
+    'Digital/Multimedia Expression',
+    'Ethical Reasoning',
+    'First-Year Writing Seminar',
+    'Global Citizenship and Intercultural Literacy',
+    'Historical Consciousness',
+    'Life Skills',
+    'Oral and/or Signed Communication',
+    'Part of a Hub sequence',
+    "Philosophical Inquiry and Life's Meanings",
+    'Quantitative Reasoning I',
+    'Quantitative Reasoning II',
+    'Research and Information Literacy',
+    'Scientific Inquiry I',
+    'Scientific Inquiry II',
+    'Social Inquiry I',
+    'Social Inquiry II',
+    'Teamwork/Collaboration',
+    'The Individual in Community',
+    'Writing, Research, and Inquiry',
+    'Writing-Intensive Course'
+];
+
 interface checkedMap {[key: string] : boolean};
 interface queryParameters {[key: string] : Array<any>};
 
@@ -59,7 +85,8 @@ export class Filter2 extends React.Component<Filter2Props,Filter2State> {
             Credits : [],
             CreditsMin: [],
             Level: [],
-            LevelMin: []
+            LevelMin: [],
+            Hub: []
         }
 
         this.state = {
@@ -76,6 +103,7 @@ export class Filter2 extends React.Component<Filter2Props,Filter2State> {
         });
 
         let updatedQueryObject : queryParameters = Object.assign({}, this.state.queryObject, {[queryCategory]: newQuery});
+        console.log(this.state);
         this.setState({ queryObject : updatedQueryObject}, this.sendGetRequest);
     }
 
@@ -116,8 +144,7 @@ export class Filter2 extends React.Component<Filter2Props,Filter2State> {
         console.log(this.state.queryObject)
         let updatedQueryObject : queryParameters = Object.assign({}, this.state.queryObject, {[queryCategory]: newQuery, ['LevelMin']: newQuery2});
         this.setState({ queryObject: updatedQueryObject}, this.sendGetRequest);
-    }
-    
+    }    
 
     private getParameterString = (Parameter : string) : string => {
         let ParameterString : string = "";
@@ -156,6 +183,7 @@ export class Filter2 extends React.Component<Filter2Props,Filter2State> {
                 <Dropdown name="Filter by College..." options={Colleges} identifier={'College'} propogateState={this.setQueryFromDropdown}/>
                 <Dropdown name="Filter by Credits..." options={CreditOptions} identifier={'Credits'} propogateState={this.setQueryFromDropdownCredits}/>
                 <Dropdown name="Filter by Level..." options={Level} identifier={'Level'} propogateState={this.setQueryFromDropdownLevels}/>
+                <Dropdown name="Filter by Hub Requirements..." options={Hub} identifier={'Hub'} propogateState={this.setQueryFromDropdown}/>
             </div>
         )
     }
