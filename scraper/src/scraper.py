@@ -25,6 +25,10 @@ def getClassInfoFromPage(url):
     for li in courseFeedDiv.find_all('li', recursive=False):
         name = li.find('a').find('strong')
         classes.append(name.contents)
+
+    if len(classes) == 0:
+        return classes
+
     classes = reduce(lambda x, y: x + y, classes)
     classes = list(map(lambda x: x.rstrip('\n'), classes))
     return classes
@@ -118,7 +122,7 @@ def getDepartmentList(soup):
 
         if departmentTuple != ('All Departments', 'http://www.bu.edu/academics/cas/courses/'):
             departmentList.append(departmentTuple)
-    
+
     return departmentList
 
 
