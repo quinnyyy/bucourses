@@ -114,9 +114,11 @@ def getDepartmentList(soup):
     departmentList = []
     for li in liList:
         a = li.find("a")
-        department = a.contents[0]
-        if department != 'All Departments':
-            departmentList.append(department)
+        departmentTuple = (a.contents[0], a['href'])
+
+        if departmentTuple != ('All Departments', 'http://www.bu.edu/academics/cas/courses/'):
+            departmentList.append(departmentTuple)
+    
     return departmentList
 
 

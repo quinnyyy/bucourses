@@ -3,7 +3,6 @@ import * as React from "react";
 import { Dropdown } from "./Dropdown";
 import { SingleClass } from "../types/SingleClassType";
 import { FilterContainer } from '../styles/FilterStyles';
-import { string } from "prop-types";
 
 const Colleges : Array<string> = [
     'Arts and Sciences',
@@ -103,7 +102,6 @@ export class Filter2 extends React.Component<Filter2Props,Filter2State> {
         });
 
         let updatedQueryObject : queryParameters = Object.assign({}, this.state.queryObject, {[queryCategory]: newQuery});
-        console.log(this.state);
         this.setState({ queryObject : updatedQueryObject}, this.sendGetRequest);
     }
 
