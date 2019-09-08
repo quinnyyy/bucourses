@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Link } from 'react-router-dom';
 import * as Styles from '../styles/NavBarStyles';
-
 // State should be which link we're on right now probably
 
 export class NavBar extends React.Component<{},{}> {
@@ -17,9 +16,11 @@ export class NavBar extends React.Component<{},{}> {
                 aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <Link style={Styles.NavBarLink} className="navbar-brand" to='/'>
-                    BUcourses
+                {
+                <Link className="navbar-brand" to='/'>
+                    <span style={Styles.test1}>{"<BU>"}Courses</span>
                 </Link>
+                }
 
                 <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul className="navbar-nav mr-auto mt-2 mt-md-0">

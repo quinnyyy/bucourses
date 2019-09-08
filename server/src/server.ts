@@ -11,6 +11,7 @@ app.get('/class', (req, res) => {
     let code: string | undefined = req.query.code;
     let limit : number | undefined = parseInt(req.query.limit,10);
     let college: string | Array<string> | undefined = req.query.college;
+    let department : string | Array<string> | undefined = req.query.department;
     let credits: Array<number> = Array.isArray(req.query.credits) ? req.query.credits.map( (item : string) => {return parseInt(item,10)}) : [parseInt(req.query.credits,10)];
     let creditsMin: number | undefined = isUndefined(req.query.creditsmin) ? undefined : Number(req.query.creditsmin);
     let level : Array<number> = Array.isArray(req.query.level) ? req.query.level.map( (item : string) => {return parseInt(item,10)}) : [parseInt(req.query.level,10)];
@@ -40,6 +41,19 @@ app.get('/class', (req, res) => {
             }
             filters.push(filter);
         }
+
+        /* Handle department parameter */
+        if(!isUndefined(department)) {
+            let filter : any = {};
+            if (typeof(department) == 'string') {
+                filter = {Department : department};
+            }
+            else {
+                filter = {Department : {$in : department}};
+            }
+            filters.push(filter);
+        }
+
 
         /* Handle BU Hub requirement parameter */
         if(!isUndefined(hub)) {
@@ -81,7 +95,7 @@ app.get('/class', (req, res) => {
                 conditions.push({Level: {$gte : levelMin}});
             }
             filters.push({$or : conditions});
-        }
+        }        
 
         /* Join the filters and run query */
         
