@@ -30,7 +30,7 @@ export class Authentication extends React.Component<{},{didLogin: boolean, name:
             }).then(() => {
                 gapi.signin2.render(GOOGLE_BUTTON_ID, 
                     {
-                        // 'width': 200,
+                        'width': 75,
                         'height': 30,
                         // 'longtitle': false,
                         'onsuccess': this.onSuccess
@@ -41,11 +41,7 @@ export class Authentication extends React.Component<{},{didLogin: boolean, name:
       
       render() {
         return (
-        <div>
           <div id={GOOGLE_BUTTON_ID}/>
-          {/* <p>{ this.state.name }</p>
-          <button onClick={()=>this.signOut()}>Sign Out</button> */}
-        </div>
         );
       }
 }

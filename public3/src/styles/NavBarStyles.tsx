@@ -3,5 +3,5 @@ export const NavBarLink = {
 };
 
 export const NavBarBackground = {
-    backgroundColor : "#F6F7F9" //"#444444"
+    backgroundColor : "#F6F7F9"
 }

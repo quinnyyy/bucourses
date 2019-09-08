@@ -31,7 +31,7 @@ export class NavBar extends React.Component<{}, NavBarState> {
                 }
 
                 <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
-                    <ul className="navbar-nav mr-auto mt-2 mt-md-0">
+                    <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
                             <Link style={Styles.NavBarLink} className="nav-link" to='/search'>Courses
                                 <span className="sr-only">(current)</span>
