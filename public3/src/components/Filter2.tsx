@@ -535,9 +535,7 @@ export class Filter2 extends React.Component<Filter2Props,Filter2State> {
         Object.keys(this.state.queryObject).forEach(parameter => {
             query += this.getParameterString(parameter);
         });
-
-        console.log(query);
-        
+                
         fetch(host + query)
             .then( res => {
                 if(res.ok) {

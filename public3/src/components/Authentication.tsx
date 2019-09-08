@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as Styles from '../styles/AuthStyles';
 
 const GOOGLE_BUTTON_ID = "google-sign-in-button";
 
@@ -30,8 +31,9 @@ export class Authentication extends React.Component<{},{didLogin: boolean, name:
             }).then(() => {
                 gapi.signin2.render(GOOGLE_BUTTON_ID, 
                     {
-                        'width': 75,
+                        'width': 90,
                         'height': 30,
+
                         // 'longtitle': false,
                         'onsuccess': this.onSuccess
                     });
@@ -41,7 +43,7 @@ export class Authentication extends React.Component<{},{didLogin: boolean, name:
       
       render() {
         return (
-          <div id={GOOGLE_BUTTON_ID}/>
+          <div style={Styles.buttonStyle} id={GOOGLE_BUTTON_ID}/>
         );
       }
 }
