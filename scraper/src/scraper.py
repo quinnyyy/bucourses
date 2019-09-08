@@ -20,11 +20,35 @@ def getNumPages(url):
 
 def getClassInfoFromPage(url):
     soup = getSoup(url)
-    courseFeedDiv = soup.find("ul", {"class": "course-feed"})
+    
     classes = []
-    for li in courseFeedDiv.find_all('li', recursive=False):
-        name = li.find('a').find('strong')
-        classes.append(name.contents)
+    courseFeedDiv = soup.find("ul", {"class": "course-feed"})
+    if courseFeedDiv == None:
+        courseFeedDiv = soup.find("div", {"class": "course-feed"})
+
+    if courseFeedDiv == None:
+        courseFeedDiv = soup.find("div", {"class": "content-panel"})
+
+    if courseFeedDiv.name == "div" and courseFeedDiv.get("class") == ["content-panel"]:
+        for h3 in courseFeedDiv.find_all('h3', recursive=False):
+            if len(h3.contents) == 0:
+                continue
+            elif len(h3.contents) > 1:
+                classes.append([h3.contents[0]])
+            else:
+                classes.append(h3.contents)
+
+    elif courseFeedDiv.name == "div":
+        for div in courseFeedDiv.find_all('div', {"class" : "cf-course"}, recurive=False):
+            code = div.find("p", {"class": "meta"}).contents[0]
+            code = code.split(' (')[0]
+            name = div.find("h4").contents[0]
+            combinedString = code + ': ' + name
+            classes.append([combinedString])
+    else:
+        for li in courseFeedDiv.find_all('li', recursive=False):
+            name = li.find('a').find('strong')
+            classes.append(name.contents)
 
     if len(classes) == 0:
         return classes
@@ -120,7 +144,7 @@ def getDepartmentList(soup):
         a = li.find("a")
         departmentTuple = (a.contents[0], a['href'])
 
-        if departmentTuple != ('All Departments', 'http://www.bu.edu/academics/cas/courses/'):
+        if departmentTuple[0] != 'All Departments':
             departmentList.append(departmentTuple)
 
     return departmentList
