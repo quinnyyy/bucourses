@@ -2,38 +2,28 @@ import * as React from "react";
 
 const GOOGLE_BUTTON_ID = "google-sign-in-button";
 
-export class Authentication extends React.Component<{},{didLogin: boolean}> {
+export class Authentication extends React.Component<{},{didLogin: boolean, name: String}> {
     constructor(props: {}) {
         super(props);
-        this.state = {didLogin: false};
+        this.state = {didLogin: false, name: ""};
     }
-    // private signOut = () : void => {
-    //     var auth2 : any = gapi.auth2.getAuthInstance();
-    //     console.log(auth2.currentUser.Ab.w3.U3);
-    //     auth2.signOut().then(() => {
-    //         console.log('User signed out');
-    //     });
-    // }
-    
 
-    // render() {
-    //     return (
-    //         <React.Fragment>
-    //             <div className="g-signin2"></div>
-    //             <button onClick={()=>this.signOut()}>Sign out</button>
-    //         </React.Fragment>
-
-    //     )
-    // }
+    private signOut = () : void => {
+        var auth2 : any = gapi.auth2.getAuthInstance();
+        console.log(auth2.currentUser.Ab.w3.U3);
+        auth2.signOut().then(() => {
+            console.log('User signed out');
+        });
+        this.setState({ didLogin: false, name: "" });
+    }
     
     onSuccess = (googleUser: any) => {
         const profile = googleUser.getBasicProfile();
-        this.setState({ didLogin: true });
+        this.setState({ didLogin: true, name: profile.getName() });
         console.log("Name: " + profile.getName());
       }
 
     componentDidMount() {
-        console.log("Name: ");
         gapi.load('auth2', () => {
             gapi.auth2.init({
                 client_id: "27000856552-tk70ev4o6nk5pln2ei93ni92semnndjk.apps.googleusercontent.com"
@@ -53,7 +43,8 @@ export class Authentication extends React.Component<{},{didLogin: boolean}> {
         return (
         <div>
           <div id={GOOGLE_BUTTON_ID}/>
-          <p>{ this.state.didLogin === true ? 'hello' : 'bye' }</p>
+          <p>{ this.state.name }</p>
+          <button onClick={()=>this.signOut()}>Sign Out</button>
         </div>
         );
       }
