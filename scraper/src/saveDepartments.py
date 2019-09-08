@@ -1,10 +1,11 @@
-import fileIO
+import json
 import scraper
 from pymongo import MongoClient
 import os
-import json
+import fileIO
 
 if __name__ == "__main__":
+
     with open('../../departments.json') as jsonFile:
         departmentMap = json.load(jsonFile)
 
@@ -34,10 +35,8 @@ if __name__ == "__main__":
         else:
             department = ""
 
-        classInfo = scraper.getClassDetails(classCode)
-        classInfo["Department"] = department
         courseInfo.update_one({"Code": classCode},
-                              {"$set": classInfo},
+                              {"$set": {"Department" : department}},
                               upsert=True)
 
     client.close()
