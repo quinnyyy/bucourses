@@ -25,24 +25,12 @@ export class Authentication extends React.Component<{},{didLogin: boolean}> {
 
     //     )
     // }
-
-    // componentDidMount() {
-    //     window.gapi.load('auth2', () => {
-    //         window.gapi.auth2.init({
-    //         client_id: <client_id from Step 1>
-    //     }).then(() => {
-    //         window.gapi.signin2.render('my-signIn', {
-    //           'scope': 'profile email',
-    //           'width': 250,
-    //           'height': 50,
-    //           'longtitle': false,
-    //           'theme': 'dark',
-    //           'onsuccess': this.onSuccess,
-    //           'onfailure': this.onFailure
-    //         })
-    //       }) 
-    //     }) 
     
+    onSuccess = (googleUser: any) => {
+        const profile = googleUser.getBasicProfile();
+        this.setState({ didLogin: true });
+        console.log("Name: " + profile.getName());
+      }
 
     componentDidMount() {
         console.log("Name: ");
@@ -55,19 +43,12 @@ export class Authentication extends React.Component<{},{didLogin: boolean}> {
                         'width': 200,
                         'height': 50,
                         'longtitle': false,
-                        // 'theme': 'dark',
                         'onsuccess': this.onSuccess
                     });
             })
         })
       }
-      onSuccess = (googleUser: any) => {
-        const profile = googleUser.getBasicProfile();
-        this.setState({ didLogin: true });
-        console.log("Name: " + profile.getName());
-      }
-
-
+      
       render() {
         return (
         <div>
